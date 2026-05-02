@@ -8,6 +8,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     background: #050505;
@@ -15,6 +19,7 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+/* HERO */
 .hero {
     height: 100vh;
     display: flex;
@@ -33,30 +38,57 @@ body {
     opacity: 0.8;
 }
 
+/* BIO */
 .bio {
     padding: 80px 15%;
     text-align: center;
 }
 
+.bio h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+}
+
+/* PHOTO */
 .main-photo {
     width: 80%;
     margin: 50px auto;
     border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
 .main-photo img {
     width: 100%;
+    display: block;
 }
 
+/* CONTACT */
 .contact {
     text-align: center;
     padding: 80px;
 }
 
+.contact h2 {
+    font-family: 'Playfair Display', serif;
+}
+
 .contact a {
     color: white;
     text-decoration: none;
+    font-size: 18px;
+}
+
+/* ANIMATION */
+.fade {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 </style>
 
@@ -65,29 +97,44 @@ body {
 <body>
 
 <section class="hero">
-    <div>
+    <div class="fade">
         <h1>Сергей Владимирович</h1>
         <p>Генеральный директор ГК «СЭТ»</p>
     </div>
 </section>
 
-<section class="bio">
+<section class="bio fade">
     <h2>Биография</h2>
     <p>
-        Сергей Владимирович — руководитель экологической компании ГК «СЭТ»,
-        развивающий современные решения в сфере экологии и устойчивого будущего.
+        Сергей Владимирович — руководитель экологической компании ГК «СЭТ».
+        Его деятельность направлена на развитие современных экологических решений
+        и формирование устойчивого будущего.
     </p>
 </section>
 
-<section class="main-photo">
-    <img src="img1.png">
+<section class="main-photo fade">
+    <img src="img1.png" alt="Сергей с наградой">
 </section>
 
-<section class="contact">
+<section class="contact fade">
     <h2>Контакты</h2>
     <p><a href="tel:+9101559606">+9101559606</a></p>
     <p><a href="mailto:89101525191@mail.ru">89101525191@mail.ru</a></p>
 </section>
+
+<script>
+const items = document.querySelectorAll('.fade');
+
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.classList.add('show');
+        }
+    });
+});
+
+items.forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>
